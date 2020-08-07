@@ -1,5 +1,4 @@
 import * as BABYLON from 'babylonjs';
-import { Sphere } from './Sphere';
-export declare class MultipleSphere extends Sphere {
+export declare class MultipleSphere {
     constructor(scene: BABYLON.Scene);
 }
