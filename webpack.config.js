@@ -24,10 +24,16 @@ module.exports =
         [
             {
                 test: /\.ts?$/,//testea todos los archivos que termine con ts
-                loader:"ts-loader"},
+                loader:"ts-loader"
+            },
+            
             {
                 test: /\.css$/i,//testea todos los archivos que termine con css
-                use: [miniCssExtractPluginLoader.loader, 'css-loader'],//llama al css dentro del javascript y luego es convertido junto con el código a la carpeta public
+                use:
+                [
+                    {loader: miniCssExtractPluginLoader.loader},
+                    {loader:'css-loader'},//llama al css dentro del javascript y luego es convertido junto con el código a la carpeta public
+                ]
             },
 
             {
@@ -39,9 +45,11 @@ module.exports =
     plugins://plugins que ayudan a webpack a entender como exportar los archivos 
     [
         new htmlWebpackPlugin({//para que funcione este modulo hay que importarlo ojo la ruta es diferente al css
+            filename: 'index.html',//nombre del nuevo archivo que creara
             template: './src/index.html',}),//la ruta esta relacionada al lugar donde esta el archivo principal html,luego webpack se encarga de colocarlo en la carpeta public
         new miniCssExtractPluginLoader({//este plugin extraera los archivos css a la carpeta public
-            template: 'bundle.css' //archivo que se creara a la hora de exportar todos los css
+            filename: 'bundle.css',//nombre del nuevo archivo que creara
+            //template: 'bundle.css' //archivo que se creara a la hora de exportar todos los css
         })
     ],
 
